@@ -1,0 +1,5 @@
+.idea/
+*.iml
+.DS_Store
+go_build_main_go
+go.sum
