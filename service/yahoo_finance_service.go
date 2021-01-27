@@ -93,17 +93,12 @@ func GetTicker(symbol string) (string, ErrorCode) {
 	if len(yahooData.QuoteResponse.Result) > 0 {
 		quote := yahooData.QuoteResponse.Result[0]
 
-		results := []string{
-			quote.LongName,
-			"Price: " + quote.Currency + " " + floatToString(quote.RegularMarketPrice),
-			"Last change: " + " " + floatToString(quote.RegularMarketChangePercent) + "%",
-		}
-		return strings.Join(results, "\n"), Ok
-	} else {
-		return "", Unknown
-	}
-}
+		var sb strings.Builder
+		fmt.Fprintf(&sb, "%s\n", quote.LongName)
+		fmt.Fprintf(&sb, "Price: %s %.2f\n", quote.Currency, quote.RegularMarketPrice)
+		fmt.Fprintf(&sb, "Last change: %.2f%%", quote.RegularMarketChangePercent)
 
-func floatToString(floatingNumber float64) string {
-	return strconv.FormatFloat(floatingNumber, 'f', 2, 64)
+		return sb.String(), Ok
+	}
+	return "", Unknown
 }
