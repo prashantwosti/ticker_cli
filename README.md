@@ -1,4 +1,6 @@
 # ticker_cli
+![Go](https://github.com/prashantwosti/ticker_cli/workflows/Go/badge.svg?branch=master)
+
 Shows you the company price from the ticker symbol.
 ` $ ticker_cli <exchange> <symbol>`
 
